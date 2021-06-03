@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:dio_networking/models/user.dart';
 
 class DioClient {
-  Dio _dio = Dio();
+  final Dio _dio = Dio();
 
   final _baseUrl = 'https://reqres.in/api';
 
