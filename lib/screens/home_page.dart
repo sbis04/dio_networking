@@ -1,6 +1,7 @@
 import 'package:dio_networking/models/data.dart';
 import 'package:dio_networking/models/user.dart';
 import 'package:dio_networking/utils/dio_client.dart';
+import 'package:dio_networking/widgets/create_user.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -30,6 +31,7 @@ class _HomePageState extends State<HomePage> {
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    CreateUser(),
                     Image.network(userData.avatar),
                     SizedBox(height: 8.0),
                     Text(
