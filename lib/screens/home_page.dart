@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
               Padding(
                 padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
                 child: Text(
-                  'GET',
+                  'GET & DELETE',
                   style: TextStyle(
                     fontSize: 22.0,
                     fontWeight: FontWeight.bold,
