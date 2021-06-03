@@ -27,80 +27,76 @@ class _CreateUserState extends State<CreateUser> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(24.0),
-      child: Container(
-        child: Column(
-          children: [
-            TextField(
-              controller: _nameController,
-              decoration: InputDecoration(hintText: 'Enter name'),
-            ),
-            TextField(
-              controller: _jobController,
-              decoration: InputDecoration(hintText: 'Enter job'),
-            ),
-            SizedBox(height: 16.0),
-            isCreating
-                ? CircularProgressIndicator()
-                : ElevatedButton(
-                    onPressed: () async {
-                      setState(() {
-                        isCreating = true;
-                      });
+    return Container(
+      child: Column(
+        children: [
+          TextField(
+            controller: _nameController,
+            decoration: InputDecoration(hintText: 'Enter name'),
+          ),
+          TextField(
+            controller: _jobController,
+            decoration: InputDecoration(hintText: 'Enter job'),
+          ),
+          SizedBox(height: 16.0),
+          isCreating
+              ? CircularProgressIndicator()
+              : ElevatedButton(
+                  onPressed: () async {
+                    setState(() {
+                      isCreating = true;
+                    });
 
-                      if (_nameController.text != '' &&
-                          _jobController.text != '') {
-                        UserInfo userInfo = UserInfo(
-                          name: _nameController.text,
-                          job: _jobController.text,
-                        );
+                    if (_nameController.text != '' &&
+                        _jobController.text != '') {
+                      UserInfo userInfo = UserInfo(
+                        name: _nameController.text,
+                        job: _jobController.text,
+                      );
 
-                        UserInfo? retrievedUser =
-                            await _dioClient.createUser(userInfo: userInfo);
+                      UserInfo? retrievedUser =
+                          await _dioClient.createUser(userInfo: userInfo);
 
-                        if (retrievedUser != null) {
-                          showDialog(
-                            context: context,
-                            builder: (context) => Dialog(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text('ID: ${retrievedUser.id}'),
-                                      Text('Name: ${retrievedUser.name}'),
-                                      Text('Job: ${retrievedUser.job}'),
-                                      Text(
-                                        'Created at: ${retrievedUser.createdAt}',
-                                      ),
-                                    ],
-                                  ),
+                      if (retrievedUser != null) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => Dialog(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text('ID: ${retrievedUser.id}'),
+                                    Text('Name: ${retrievedUser.name}'),
+                                    Text('Job: ${retrievedUser.job}'),
+                                    Text(
+                                      'Created at: ${retrievedUser.createdAt}',
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
-                          );
-                        }
+                          ),
+                        );
                       }
+                    }
 
-                      setState(() {
-                        isCreating = false;
-                      });
-                    },
-                    child: Text(
-                      'Create user',
-                      style: TextStyle(fontSize: 20.0),
-                    ),
+                    setState(() {
+                      isCreating = false;
+                    });
+                  },
+                  child: Text(
+                    'Create user',
+                    style: TextStyle(fontSize: 20.0),
                   ),
-          ],
-        ),
+                ),
+        ],
       ),
     );
   }
