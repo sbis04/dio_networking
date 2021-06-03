@@ -1,3 +1,4 @@
+import 'package:dio_networking/models/data.dart';
 import 'package:dio_networking/models/user.dart';
 import 'package:dio_networking/utils/dio_client.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class _HomePageState extends State<HomePage> {
         title: Text('User Info'),
       ),
       body: Center(
-        child: FutureBuilder<User>(
+        child: FutureBuilder<User?>(
           future: _client.getUser(id: 1),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
