@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:dio_networking/models/user.dart';
 
@@ -8,12 +6,29 @@ class DioClient {
 
   final _baseUrl = 'https://reqres.in/api';
 
-  Future<User> getUser({required int id}) async {
-    Response userData = await _dio.get(_baseUrl + '/users/$id');
+  Future<User?> getUser({required int id}) async {
+    User? user;
 
-    print('User Info: ${userData.data}');
+    try {
+      Response userData = await _dio.get(_baseUrl + '/users/$id');
 
-    User user = User.fromJson(userData.data);
+      print('User Info: ${userData.data}');
+
+      user = User.fromJson(userData.data);
+    } on DioError catch (e) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx and is also not 304.
+      if (e.response != null) {
+        print('Dio error!');
+        print('STATUS: ${e.response?.statusCode}');
+        print('DATA: ${e.response?.data}');
+        print('HEADERS: ${e.response?.headers}');
+      } else {
+        // Error due to setting up or sending the request
+        print('Error sending request!');
+        print(e.message);
+      }
+    }
 
     return user;
   }
