@@ -7,7 +7,7 @@ class DioClient {
 
   final _baseUrl = 'https://reqres.in/api';
 
-  Future<User?> getUser({required int id}) async {
+  Future<User?> getUser({required String id}) async {
     User? user;
 
     try {
@@ -51,5 +51,36 @@ class DioClient {
     }
 
     return retrievedUser;
+  }
+
+  Future<UserInfo?> updateUser({
+    required UserInfo userInfo,
+    required String id,
+  }) async {
+    UserInfo? updatedUser;
+
+    try {
+      Response response = await _dio.put(
+        _baseUrl + '/users/$id',
+        data: userInfo.toJson(),
+      );
+
+      print('User updated: ${response.data}');
+
+      updatedUser = UserInfo.fromJson(response.data);
+    } catch (e) {
+      print('Error updating user: $e');
+    }
+
+    return updatedUser;
+  }
+
+  Future<void> deleteUser({required String id}) async {
+    try {
+      await _dio.delete(_baseUrl + '/users/$id');
+      print('User deleted!');
+    } catch (e) {
+      print('Error deleting user: $e');
+    }
   }
 }
