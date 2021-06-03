@@ -8,12 +8,14 @@ class UserInfo {
   String job;
   String? id;
   String? createdAt;
+  String? updatedAt;
 
   UserInfo({
     required this.name,
     required this.job,
     this.id,
     this.createdAt,
+    this.updatedAt,
   });
 
   factory UserInfo.fromJson(Map<String, dynamic> json) =>

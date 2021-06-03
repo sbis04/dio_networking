@@ -12,6 +12,7 @@ UserInfo _$UserInfoFromJson(Map<String, dynamic> json) {
     job: json['job'] as String,
     id: json['id'] as String?,
     createdAt: json['createdAt'] as String?,
+    updatedAt: json['updatedAt'] as String?,
   );
 }
 
@@ -20,4 +21,5 @@ Map<String, dynamic> _$UserInfoToJson(UserInfo instance) => <String, dynamic>{
       'job': instance.job,
       'id': instance.id,
       'createdAt': instance.createdAt,
+      'updatedAt': instance.updatedAt,
     };
