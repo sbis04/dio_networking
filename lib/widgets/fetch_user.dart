@@ -87,6 +87,14 @@ class _FetchUserState extends State<FetchUser> {
                         _isDeleting = true;
                       });
                       await _client.deleteUser(id: _idController.text);
+                      final snackBar = SnackBar(
+                        content: Text(
+                          'User at id ${_idController.text} deleted!',
+                          style: TextStyle(fontSize: 20.0),
+                        ),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
                       setState(() {
                         _isDeleting = false;
                       });
