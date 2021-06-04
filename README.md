@@ -20,7 +20,10 @@ The final app looks like this:
 
 | Request Type | Demo |
 | --- | --- |
-| GET | <img src="screenshots/dio_post.gif" alt="Dio GET" /> |
+| **GET** | ![](screenshots/dio_get.gif) |
+| **POST** | ![](screenshots/dio_post.gif) |
+| **PUT** | ![](screenshots/dio_put.gif) |
+| **DELETE** | ![](screenshots/dio_delete.gif) |
 
 ## Packages
 
