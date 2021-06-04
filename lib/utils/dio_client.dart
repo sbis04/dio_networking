@@ -1,17 +1,22 @@
 import 'package:dio/dio.dart';
 import 'package:dio_networking/models/user.dart';
 import 'package:dio_networking/models/user_info.dart';
+import 'package:dio_networking/utils/logging.dart';
 
 class DioClient {
-  final Dio _dio = Dio();
-
-  final _baseUrl = 'https://reqres.in/api';
+  final Dio _dio = Dio(
+    BaseOptions(
+      baseUrl: 'https://reqres.in/api',
+      connectTimeout: 5000,
+      receiveTimeout: 3000,
+    ),
+  )..interceptors.add(Logging());
 
   Future<User?> getUser({required String id}) async {
     User? user;
 
     try {
-      Response userData = await _dio.get(_baseUrl + '/users/$id');
+      Response userData = await _dio.get('/users/$id');
 
       print('User Info: ${userData.data}');
 
@@ -39,7 +44,7 @@ class DioClient {
 
     try {
       Response response = await _dio.post(
-        _baseUrl + '/users',
+        '/users',
         data: userInfo.toJson(),
       );
 
@@ -61,7 +66,7 @@ class DioClient {
 
     try {
       Response response = await _dio.put(
-        _baseUrl + '/users/$id',
+        '/users/$id',
         data: userInfo.toJson(),
       );
 
@@ -77,7 +82,7 @@ class DioClient {
 
   Future<void> deleteUser({required String id}) async {
     try {
-      await _dio.delete(_baseUrl + '/users/$id');
+      await _dio.delete('/users/$id');
       print('User deleted!');
     } catch (e) {
       print('Error deleting user: $e');
