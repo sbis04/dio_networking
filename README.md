@@ -1,5 +1,7 @@
 # Networking in Flutter using Dio
 
+![](screenshots/dio_networking_cover.png)
+
 This is a sample Flutter app for demonstrating how to perform network requests using the **Dio** package. For this demo API provided by [REQ | RES](https://reqres.in/) is used. 
 
 The functionalities of Dio showcased in this app are as follows:
@@ -11,10 +13,6 @@ The functionalities of Dio showcased in this app are as follows:
 * Base options
 * Uploading files
 * Interceptors
-
-## Screenshot
-
-The final app looks like this:
 
 ## Demonstration
 
